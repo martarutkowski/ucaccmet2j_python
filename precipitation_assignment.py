@@ -17,6 +17,7 @@ for station in stations:
     station_number = station['Station']
     state = station['State']
     city_name = station['Location']
+
     # create a list with the values of precipitation
     city_data = []
     for measurements in contents:
@@ -55,7 +56,6 @@ for station in stations:
 }
     
 total_precipitation_all_stations = 0
-
 # calculate relative yearly precipitation
 for city_name, data in precipitation_info.items():
     # add to the total for all stations
