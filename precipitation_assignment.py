@@ -28,14 +28,26 @@ for measurements in seattle_data:
     else:
         total_monthly_precipitation[month] = 0  # enter the month if not already in the dictionary
 
-# difine a dictionary to store information
+# calculating total yearly precipitation
+total_yearly_precipitation = sum(total_monthly_precipitation.values())
+
+# calculating relative monthly precipitation
+# creating a dictionary 
+relative_monthly_precipitation = {}
+
+for month, monthly_total in total_monthly_precipitation.items():
+    relative_monthly_precipitation[month] = monthly_total/total_yearly_precipitation
+
+# define a dictionary to store information
 precipitation_info = {}
 
 #store the results in the precipitation information dictionary
 precipitation_info[city_name] = {
         'station' : station_number,
         'state' : state,
-        'total_monthly_precipitation' : total_monthly_precipitation
+        'total_monthly_precipitation' : total_monthly_precipitation,
+        'total_yearly_precipitation' : total_yearly_precipitation,
+        'relative_monthly_precipitation' : relative_monthly_precipitation
 }
 #store the results in results.json file
 with open('results.json','w') as file:
