@@ -6,7 +6,7 @@ with open ('precipitation.json') as file:
     contents = json.load(file)
 
 # Seatlle data
-station_number = 'GHCND:USW00093814'
+station_number = 'GHCND:US1WAKG0038'
 state = 'WA'
 city_name = 'Seattle'
 
