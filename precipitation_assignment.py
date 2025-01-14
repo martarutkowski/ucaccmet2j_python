@@ -9,7 +9,6 @@ with open('stations.csv') as file:
 with open ('precipitation.json') as file:
     contents = json.load(file)
 
-
 # define a dictionary to store information
 precipitation_info = {}
 
@@ -46,7 +45,6 @@ for station in stations:
     for month, monthly_total in total_monthly_precipitation.items():
         relative_monthly_precipitation[month] = monthly_total/total_yearly_precipitation
 
-
     #store the results in the precipitation information dictionary
     precipitation_info[city_name] = {
             'station' : station_number,
@@ -55,6 +53,18 @@ for station in stations:
             'total_yearly_precipitation' : total_yearly_precipitation,
             'relative_monthly_precipitation' : list(relative_monthly_precipitation.values())
 }
+    
+total_precipitation_all_stations = 0
+
+# calculate relative yearly precipitation
+for city_name, data in precipitation_info.items():
+    # add to the total for all stations
+    total_precipitation_all_stations += total_yearly_precipitation
+    # divide total yearly precipitation of one city by the sum of the total yearly precipitation of all cities
+    relative_yearly_precipitation = (data['total_yearly_precipitation'] / total_precipitation_all_stations)
+    # Add the relative yearly precipitation to the dictionary
+    precipitation_info[city_name]['relative_yearly_precipitation'] = relative_yearly_precipitation
+
 #store the results in results.json file
 with open('results.json','w') as file:
     json.dump(precipitation_info,file, indent=4)
